@@ -15,8 +15,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# مفتاح Groq (سيتم إضافته من Render لاحقاً)
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "ضع_مفتاحك_هنا")
+# مفتاح Groq من Environment Variables
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 
 client = Groq(api_key=GROQ_API_KEY)
 
@@ -57,7 +57,3 @@ async def chat(request: ChatRequest):
 @app.get("/")
 async def root():
     return {"message": "الخادم يعمل! 🎉"}
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
